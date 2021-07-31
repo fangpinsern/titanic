@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "antd";
-import AddVenueForm from "./addVenueForm";
-// import Form from "antd/lib/form/Form";
+import AddSubVenueForm from "./addSubVenueForm";
 
-const AddVenueModal = () => {
+const AddSubVenueModal = (props) => {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
   const [hello] = Form.useForm();
+
+  const parentId = props.parentId;
 
   const showModal = () => {
     setVisible(true);
@@ -19,7 +20,9 @@ const AddVenueModal = () => {
     console.log(hello.getFieldsValue(true));
 
     const response = await fetch(
-      process.env.REACT_APP_BACKEND_URL + "/api/v1/venue/",
+      process.env.REACT_APP_BACKEND_URL +
+        "/api/v1/venue/childVenue/" +
+        parentId,
       {
         method: "POST",
         body: JSON.stringify(hello.getFieldsValue(true)),
@@ -48,7 +51,7 @@ const AddVenueModal = () => {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Add Venue
+        Add Sub Venue
       </Button>
       <Modal
         title="Title"
@@ -71,10 +74,10 @@ const AddVenueModal = () => {
         ]}
       >
         {/* <p>{modalText}</p> */}
-        <AddVenueForm form={hello} />
+        <AddSubVenueForm form={hello} />
       </Modal>
     </>
   );
 };
 
-export default AddVenueModal;
+export default AddSubVenueModal;

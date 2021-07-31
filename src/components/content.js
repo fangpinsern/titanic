@@ -1,6 +1,8 @@
 import React from "react";
 import AddVenueModal from "./addVenueModal";
+import BookingRequestTableComponent from "./bookingRequestTable";
 import TableComponent from "./table";
+import VenueTableComponent from "./venueTable";
 const ContentComponent = (props) => {
   const isLoading = props.isLoading;
 
@@ -8,19 +10,11 @@ const ContentComponent = (props) => {
     return <TableComponent />;
   }
   if (props.sideBarOption === "VENUE") {
-    console.log(props.data);
-    return (
-      <React.Fragment>
-        <AddVenueModal />
-        <TableComponent
-          columns={props.columns}
-          data={props.data.venues.map((venue) => {
-            venue.key = venue.id;
-            return venue;
-          })}
-        />
-      </React.Fragment>
-    );
+    return <VenueTableComponent />;
+  }
+
+  if (props.sideBarOption === "BOOKING_REQ") {
+    return <BookingRequestTableComponent />;
   }
 
   return <TableComponent />;

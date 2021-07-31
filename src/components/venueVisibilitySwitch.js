@@ -10,11 +10,11 @@ const VenueVisibilitySwitch = (props) => {
     setIsLoading(true);
 
     const response = await fetch(
-      "http://localhost:8080/api/v1/venue/visibility/" + venueId,
+      process.env.REACT_APP_BACKEND_URL + "/api/v1/venue/visibility/" + venueId,
       {
         method: "PUT",
         headers: {
-          Authorization: "KEVII1!",
+          authorization: process.env.REACT_APP_BACKEND_AUTH,
         },
       }
     );

@@ -105,9 +105,9 @@ const LayoutComponent = () => {
       try {
         setIsLoading(true);
         const res = await fetch(
-          "http://localhost:8080/api/v1/venue/admin/search",
+          process.env.REACT_APP_BACKEND_URL + "/api/v1/venue/admin/search",
           {
-            headers: { authorization: "KEVII1!" },
+            headers: { authorization: process.env.REACT_APP_BACKEND_AUTH },
           }
         );
         const resData = await res.json();
