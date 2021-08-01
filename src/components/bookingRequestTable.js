@@ -42,6 +42,16 @@ const columnsPENDING = [
     title: "timing slots",
     dataIndex: "timingSlots",
     key: "timingSlots",
+    render: (tags) => {
+      // const color = tag ? "green" : "volcano";
+      return tags.map((tag) => {
+        return (
+          <Tag color={"geekblue"} key={tag}>
+            {tag ?? "Personal"}
+          </Tag>
+        );
+      });
+    },
   },
   {
     title: "notes",
@@ -95,6 +105,16 @@ const columnsAPPROVED = [
     title: "timing slots",
     dataIndex: "timingSlots",
     key: "timingSlots",
+    render: (tags) => {
+      // const color = tag ? "green" : "volcano";
+      return tags.map((tag) => {
+        return (
+          <Tag color={"geekblue"} key={tag}>
+            {tag ?? "Personal"}
+          </Tag>
+        );
+      });
+    },
   },
   {
     title: "notes",
@@ -140,6 +160,16 @@ const columnsREJECTED = [
     title: "timing slots",
     dataIndex: "timingSlots",
     key: "timingSlots",
+    render: (tags) => {
+      // const color = tag ? "green" : "volcano";
+      return tags.map((tag) => {
+        return (
+          <Tag color={"geekblue"} key={tag}>
+            {tag ?? "Personal"}
+          </Tag>
+        );
+      });
+    },
   },
   {
     title: "notes",
