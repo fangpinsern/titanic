@@ -1,6 +1,7 @@
 import React from "react";
 import AddVenueModal from "./addVenueModal";
 import BookingRequestTableComponent from "./bookingRequestTable";
+import RecurringBookingTableComponent from "./recurringBookingTable";
 import TableComponent from "./table";
 import VenueTableComponent from "./venueTable";
 const ContentComponent = (props) => {
@@ -15,6 +16,10 @@ const ContentComponent = (props) => {
 
   if (props.sideBarOption === "BOOKING_REQ") {
     return <BookingRequestTableComponent />;
+  }
+
+  if (props.sideBarOption === "RECURRING_BOOOKINGS") {
+    return <RecurringBookingTableComponent />;
   }
 
   return <TableComponent />;

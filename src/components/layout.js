@@ -169,7 +169,12 @@ const LayoutComponent = () => {
               >
                 Booking Request
               </Menu.Item>
-              <Menu.Item key="3">option3</Menu.Item>
+              <Menu.Item
+                key="3"
+                onClick={() => setSideBarOption("RECURRING_BOOOKINGS")}
+              >
+                Recurring Bookings
+              </Menu.Item>
               <Menu.Item key="4">option4</Menu.Item>
             </Menu>
           </Sider>

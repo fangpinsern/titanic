@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "antd";
-import AddSubVenueForm from "./addSubVenueForm";
+import AddRecurringBookingForm from "./addRecurringBookingForm";
 
-const AddSubVenueModal = (props) => {
+const AddRecurringBookingModal = () => {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
   const [hello] = Form.useForm();
-
-  const parentId = props.parentId;
 
   const showModal = () => {
     setVisible(true);
@@ -17,12 +15,10 @@ const AddSubVenueModal = (props) => {
   const handleOk = async () => {
     setModalText("The modal will be closed after two seconds");
     setConfirmLoading(true);
-    // console.log(hello.getFieldsValue(true));
+    console.log(hello.getFieldsValue(true));
 
     const response = await fetch(
-      process.env.REACT_APP_BACKEND_URL +
-        "/api/v1/venue/childVenue/" +
-        parentId,
+      process.env.REACT_APP_BACKEND_URL + "/api/v1/recurringBooking/create",
       {
         method: "POST",
         body: JSON.stringify(hello.getFieldsValue(true)),
@@ -48,7 +44,7 @@ const AddSubVenueModal = (props) => {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Add Sub Venue
+        Add Recurring Bookings
       </Button>
       <Modal
         title="Title"
@@ -71,10 +67,10 @@ const AddSubVenueModal = (props) => {
         ]}
       >
         {/* <p>{modalText}</p> */}
-        <AddSubVenueForm form={hello} />
+        <AddRecurringBookingForm form={hello} />
       </Modal>
     </>
   );
 };
 
-export default AddSubVenueModal;
+export default AddRecurringBookingModal;

@@ -1,5 +1,5 @@
 import { Space } from "antd";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TableComponent from "./table";
 import VenueVisibilitySwitch from "./venueVisibilitySwitch";
 import AddSubVenueModal from "./addSubVenueModal";
@@ -64,7 +64,7 @@ const SubVenueTableComponent = (props) => {
     sendReq();
   }, []);
   return (
-    <Space>
+    <React.Fragment>
       <AddSubVenueModal parentId={parentId} />
       <TableComponent
         columns={columns}
@@ -78,7 +78,7 @@ const SubVenueTableComponent = (props) => {
         }
         pagination={false}
       />
-    </Space>
+    </React.Fragment>
   );
 };
 
