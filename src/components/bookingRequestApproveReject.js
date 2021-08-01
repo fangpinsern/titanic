@@ -27,7 +27,7 @@ const BookingRequestApproveRejectComponent = (props) => {
     Modal.success({
       content: "Approved",
     });
-    // console.log(responseData);
+    props.setRefresh((value) => !value);
   };
 
   const rejectFunction = async () => {
@@ -56,8 +56,9 @@ const BookingRequestApproveRejectComponent = (props) => {
     Modal.success({
       content: "Rejected",
     });
-    // console.log(responseData);
+    props.setRefresh((value) => !value);
   };
+
   return (
     <Space>
       <Button type="primary" onClick={approveFunction}>

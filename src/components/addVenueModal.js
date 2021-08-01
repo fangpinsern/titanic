@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Button, Form } from "antd";
 import AddVenueForm from "./addVenueForm";
-// import Form from "antd/lib/form/Form";
 
-const AddVenueModal = () => {
+const AddVenueModal = (props) => {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
@@ -16,7 +15,6 @@ const AddVenueModal = () => {
   const handleOk = async () => {
     setModalText("The modal will be closed after two seconds");
     setConfirmLoading(true);
-    console.log(hello.getFieldsValue(true));
 
     const response = await fetch(
       process.env.REACT_APP_BACKEND_URL + "/api/v1/venue/",
@@ -31,13 +29,11 @@ const AddVenueModal = () => {
     );
 
     const responseData = await response.json();
-    console.log(responseData);
 
-    setTimeout(() => {
-      setVisible(false);
-      setConfirmLoading(false);
-      hello.resetFields();
-    }, 2000);
+    setVisible(false);
+    setConfirmLoading(false);
+    hello.resetFields();
+    props.setRefresh((value) => !value);
   };
 
   const handleCancel = () => {

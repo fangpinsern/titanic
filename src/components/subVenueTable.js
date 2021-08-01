@@ -4,39 +4,46 @@ import TableComponent from "./table";
 import VenueVisibilitySwitch from "./venueVisibilitySwitch";
 import AddSubVenueModal from "./addSubVenueModal";
 
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Capacity",
-    dataIndex: "capacity",
-    key: "capacity",
-  },
-  {
-    title: "Description",
-    dataIndex: "description",
-    key: "description",
-  },
-  {
-    title: "visible",
-    dataIndex: "visible",
-    key: "visible",
-    render: (visible, record) => {
-      return <VenueVisibilitySwitch visible={visible} venueId={record.id} />;
-    },
-  },
-];
-
 const SubVenueTableComponent = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [venueData, setVenueData] = useState();
   const [error, setError] = useState();
+  const [refresh, setRefresh] = useState(true);
 
   const parentId = props.parentId;
+
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Capacity",
+      dataIndex: "capacity",
+      key: "capacity",
+    },
+    {
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
+    },
+    {
+      title: "visible",
+      dataIndex: "visible",
+      key: "visible",
+      render: (visible, record) => {
+        return (
+          <VenueVisibilitySwitch
+            visible={visible}
+            venueId={record.id}
+            setRefresh={setRefresh}
+          />
+        );
+      },
+    },
+  ];
 
   useEffect(() => {
     const sendReq = async () => {
@@ -62,10 +69,10 @@ const SubVenueTableComponent = (props) => {
       }
     };
     sendReq();
-  }, []);
+  }, [refresh]);
   return (
     <React.Fragment>
-      <AddSubVenueModal parentId={parentId} />
+      <AddSubVenueModal parentId={parentId} setRefresh={setRefresh} />
       <TableComponent
         columns={columns}
         data={

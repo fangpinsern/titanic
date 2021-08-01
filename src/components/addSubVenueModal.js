@@ -17,7 +17,6 @@ const AddSubVenueModal = (props) => {
   const handleOk = async () => {
     setModalText("The modal will be closed after two seconds");
     setConfirmLoading(true);
-    // console.log(hello.getFieldsValue(true));
 
     const response = await fetch(
       process.env.REACT_APP_BACKEND_URL +
@@ -34,10 +33,10 @@ const AddSubVenueModal = (props) => {
     );
 
     const responseData = await response.json();
-    console.log(responseData);
     setVisible(false);
     setConfirmLoading(false);
     hello.resetFields();
+    props.setRefresh((value) => !value);
   };
 
   const handleCancel = () => {

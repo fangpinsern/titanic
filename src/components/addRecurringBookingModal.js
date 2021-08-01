@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Form } from "antd";
 import AddRecurringBookingForm from "./addRecurringBookingForm";
 
-const AddRecurringBookingModal = () => {
+const AddRecurringBookingModal = (props) => {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
@@ -30,10 +30,10 @@ const AddRecurringBookingModal = () => {
     );
 
     const responseData = await response.json();
-    console.log(responseData);
     setVisible(false);
     setConfirmLoading(false);
     hello.resetFields();
+    props.setRefresh((value) => !value);
   };
 
   const handleCancel = () => {
@@ -49,7 +49,6 @@ const AddRecurringBookingModal = () => {
       <Modal
         title="Title"
         visible={visible}
-        // onOk={handleOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
         footer={[
@@ -66,7 +65,6 @@ const AddRecurringBookingModal = () => {
           </Button>,
         ]}
       >
-        {/* <p>{modalText}</p> */}
         <AddRecurringBookingForm form={hello} />
       </Modal>
     </>

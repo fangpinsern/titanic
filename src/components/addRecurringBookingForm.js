@@ -1,4 +1,5 @@
 import { Form, Input, Select } from "antd";
+import { useEffect, useState } from "react";
 import {
   TimingSlotsAvailable,
   TimingSlotNumberToTimingMapping,
@@ -8,6 +9,10 @@ import {
 const { Option } = Select;
 
 const AddRecurringBookingForm = (props) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [venueData, setVenueData] = useState([]);
+  const [error, setError] = useState();
+
   const onFinish = (values) => {
     console.log("Success:", values);
   };
@@ -15,6 +20,30 @@ const AddRecurringBookingForm = (props) => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  useEffect(() => {
+    const sendReq = async () => {
+      try {
+        setIsLoading(true);
+        const res = await fetch(
+          process.env.REACT_APP_BACKEND_URL + "/api/v1/venue/admin/search",
+          {
+            headers: { authorization: process.env.REACT_APP_BACKEND_AUTH },
+          }
+        );
+        const resData = await res.json();
+        if (!res.ok) {
+          throw new Error(resData.msg);
+        }
+        setVenueData(resData.venues);
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+        setError(err.msg);
+      }
+    };
+    sendReq();
+  }, []);
 
   return (
     <Form
@@ -39,9 +68,12 @@ const AddRecurringBookingForm = (props) => {
         name="venueId"
         rules={[{ required: true, message: "Please input venue" }]}
       >
-        <Input />
+        <Select placeholder="Please day of the week">
+          {venueData.map((venue) => {
+            return <Option value={venue.id}>{venue.name}</Option>;
+          })}
+        </Select>
       </Form.Item>
-
       <Form.Item
         label="Start Date (yyyymmdd)"
         name="startDate"

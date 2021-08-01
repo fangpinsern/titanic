@@ -61,20 +61,13 @@ const columns = [
     dataIndex: "notes",
     key: "notes",
   },
-  //   {
-  //     title: "Approve",
-  //     dataIndex: "approve",
-  //     key: "approve",
-  //     render: (approve, record) => (
-  //       <BookingRequestApproveRejectComponent bookingRequestId={record.id} />
-  //     ),
-  //   },
 ];
 
 const RecurringBookingTableComponent = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [recurringBookingData, setRecurringBookingData] = useState();
   const [error, setError] = useState();
+  const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
     const sendReq = async () => {
@@ -98,10 +91,11 @@ const RecurringBookingTableComponent = () => {
       }
     };
     sendReq();
-  }, []);
+  }, [refresh]);
+
   return (
     <React.Fragment>
-      <AddRecurringBookingModal />
+      <AddRecurringBookingModal setRefresh={setRefresh} />
       <TableComponent columns={columns} data={recurringBookingData} />
     </React.Fragment>
   );

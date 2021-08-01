@@ -5,69 +5,6 @@ import TableComponent from "./table";
 
 const { TabPane } = Tabs;
 
-const columnsPENDING = [
-  {
-    title: "venue",
-    dataIndex: "venue",
-    key: "venue",
-    render: (venue) => {
-      return venue.name;
-    },
-  },
-  {
-    title: "CCA",
-    dataIndex: "cca",
-    key: "cca",
-    render: (tag) => {
-      const color = tag ? "green" : "volcano";
-      return (
-        <Tag color={color} key={tag}>
-          {tag ?? "Personal"}
-        </Tag>
-      );
-    },
-  },
-  {
-    title: "email",
-    dataIndex: "email",
-    key: "email",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Date (yyyy/mm/dd)",
-    dataIndex: "date",
-    key: "date",
-  },
-  {
-    title: "timing slots",
-    dataIndex: "timingSlots",
-    key: "timingSlots",
-    render: (tags) => {
-      // const color = tag ? "green" : "volcano";
-      return tags.map((tag) => {
-        return (
-          <Tag color={"geekblue"} key={tag}>
-            {tag ?? "Personal"}
-          </Tag>
-        );
-      });
-    },
-  },
-  {
-    title: "notes",
-    dataIndex: "notes",
-    key: "notes",
-  },
-  {
-    title: "Approve",
-    dataIndex: "approve",
-    key: "approve",
-    render: (approve, record) => (
-      <BookingRequestApproveRejectComponent bookingRequestId={record.id} />
-    ),
-  },
-];
-
 const columnsAPPROVED = [
   {
     title: "venue",
@@ -181,6 +118,8 @@ const columnsREJECTED = [
 const BookingRequestTableComponent = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [bookingRequestData, setBookingRequestData] = useState();
+  const [refresh, setRefresh] = useState(true);
+
   function callback(key) {
     console.log(key);
     let url = process.env.REACT_APP_BACKEND_URL + "/api/v1/bookingreq/all";
@@ -218,13 +157,72 @@ const BookingRequestTableComponent = () => {
     sendReq();
   }
 
-  //   <TableComponent
-  //           columns={props.columns}
-  //           data={props.data.venues.map((venue) => {
-  //             venue.key = venue.id;
-  //             return venue;
-  //           })}
-  //         />
+  const columnsPENDING = [
+    {
+      title: "venue",
+      dataIndex: "venue",
+      key: "venue",
+      render: (venue) => {
+        return venue.name;
+      },
+    },
+    {
+      title: "CCA",
+      dataIndex: "cca",
+      key: "cca",
+      render: (tag) => {
+        const color = tag ? "green" : "volcano";
+        return (
+          <Tag color={color} key={tag}>
+            {tag ?? "Personal"}
+          </Tag>
+        );
+      },
+    },
+    {
+      title: "email",
+      dataIndex: "email",
+      key: "email",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Date (yyyy/mm/dd)",
+      dataIndex: "date",
+      key: "date",
+    },
+    {
+      title: "timing slots",
+      dataIndex: "timingSlots",
+      key: "timingSlots",
+      render: (tags) => {
+        // const color = tag ? "green" : "volcano";
+        return tags.map((tag) => {
+          return (
+            <Tag color={"geekblue"} key={tag}>
+              {tag ?? "Personal"}
+            </Tag>
+          );
+        });
+      },
+    },
+    {
+      title: "notes",
+      dataIndex: "notes",
+      key: "notes",
+    },
+    {
+      title: "Approve",
+      dataIndex: "approve",
+      key: "approve",
+      render: (approve, record) => (
+        <BookingRequestApproveRejectComponent
+          bookingRequestId={record.id}
+          setRefresh={setRefresh}
+        />
+      ),
+    },
+  ];
+
   useEffect(() => {
     const sendReq = async () => {
       try {
@@ -248,7 +246,7 @@ const BookingRequestTableComponent = () => {
       }
     };
     sendReq();
-  }, []);
+  }, [refresh]);
   return (
     <Tabs defaultActiveKey="1" onChange={callback}>
       <TabPane tab="Pending" key="1">

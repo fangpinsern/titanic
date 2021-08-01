@@ -23,6 +23,7 @@ const VenueVisibilitySwitch = (props) => {
     console.log(responseData);
     setStatus(responseData.venue.visible);
     setIsLoading(false);
+    props.setRefresh((value) => !value);
   };
 
   return (
