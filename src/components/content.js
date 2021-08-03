@@ -3,7 +3,6 @@ import BookingRequestTableComponent from "./bookingRequestTable";
 import RecurringBookingTableComponent from "./recurringBooking/recurringBookingTable";
 import TableComponent from "./table";
 import VenueTableComponent from "./venue/venueTable";
-import VenueCalendarOverviewComponent from "./venueCalendarOverview/venueCalendarOverview";
 
 const ContentComponent = (props) => {
   const isLoading = props.isLoading;
@@ -21,10 +20,6 @@ const ContentComponent = (props) => {
 
   if (props.sideBarOption === "RECURRING_BOOOKINGS") {
     return <RecurringBookingTableComponent />;
-  }
-
-  if (props.sideBarOption === "CALENDAR_OVERVIEW") {
-    return <VenueCalendarOverviewComponent />;
   }
 
   return <TableComponent />;
