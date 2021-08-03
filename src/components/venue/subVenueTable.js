@@ -1,6 +1,5 @@
-import { Space } from "antd";
 import React, { useEffect, useState } from "react";
-import TableComponent from "./table";
+import TableComponent from "../table";
 import VenueVisibilitySwitch from "./venueVisibilitySwitch";
 import AddSubVenueModal from "./addSubVenueModal";
 
@@ -34,6 +33,7 @@ const SubVenueTableComponent = (props) => {
       dataIndex: "visible",
       key: "visible",
       render: (visible, record) => {
+        // console.log("i am here", visible, record.name);
         return (
           <VenueVisibilitySwitch
             visible={visible}
@@ -63,13 +63,14 @@ const SubVenueTableComponent = (props) => {
         }
         setVenueData(resData.venues);
         setIsLoading(false);
+        console.log("hello!!!", props.parentRefresh);
       } catch (err) {
         setIsLoading(false);
         setError(err.msg);
       }
     };
     sendReq();
-  }, [refresh]);
+  }, [refresh, props.parentRefresh]);
   return (
     <React.Fragment>
       <AddSubVenueModal parentId={parentId} setRefresh={setRefresh} />

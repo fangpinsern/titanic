@@ -1,7 +1,7 @@
 import { Space, Tag } from "antd";
 import React, { useEffect, useState } from "react";
 import AddRecurringBookingModal from "./addRecurringBookingModal";
-import TableComponent from "./table";
+import TableComponent from "../table";
 
 const columns = [
   {

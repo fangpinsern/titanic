@@ -5,7 +5,7 @@ import {
   TimingSlotNumberToTimingMapping,
   numberToWeekday,
   numberOfWeekday,
-} from "../constants/timingSlotsAvailable";
+} from "../../constants/timingSlotsAvailable";
 const { Option } = Select;
 
 const AddRecurringBookingForm = (props) => {

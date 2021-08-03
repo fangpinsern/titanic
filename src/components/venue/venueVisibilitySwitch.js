@@ -20,8 +20,9 @@ const VenueVisibilitySwitch = (props) => {
     );
 
     const responseData = await response.json();
-    console.log(responseData);
     setStatus(responseData.venue.visible);
+    console.log(responseData.venue.visible);
+
     setIsLoading(false);
     props.setRefresh((value) => !value);
   };
@@ -30,7 +31,7 @@ const VenueVisibilitySwitch = (props) => {
     <Switch
       checkedChildren="On"
       unCheckedChildren="Off"
-      checked={status}
+      checked={props.visible}
       onChange={changeFunc}
       loading={isLoading}
     />

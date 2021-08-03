@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import AddVenueModal from "./addVenueModal";
 import SubVenueTableComponent from "./subVenueTable";
-import TableComponent from "./table";
+import TableComponent from "../table";
 import VenueVisibilitySwitch from "./venueVisibilitySwitch";
 
 const VenueTableComponent = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [sideBarOption, setSideBarOption] = useState("VENUE");
   const [venueData, setVenueData] = useState();
   const [error, setError] = useState();
   const [refresh, setRefresh] = useState(true);
@@ -84,7 +83,12 @@ const VenueTableComponent = () => {
             : []
         }
         expandable={(record) => {
-          return <SubVenueTableComponent parentId={record.id} />;
+          return (
+            <SubVenueTableComponent
+              parentId={record.id}
+              parentRefresh={refresh}
+            />
+          );
         }}
       />
     </React.Fragment>

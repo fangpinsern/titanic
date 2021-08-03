@@ -15,6 +15,7 @@ const TableComponent = (props) => {
               pageSizeOptions: ["10", "20", "30"],
             }
       }
+      scroll={{ x: "max-content" }}
     />
   );
 };
