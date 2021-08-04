@@ -3,6 +3,7 @@ import AddVenueModal from "./addVenueModal";
 import SubVenueTableComponent from "./subVenueTable";
 import TableComponent from "../table";
 import VenueVisibilitySwitch from "./venueVisibilitySwitch";
+import EditVenueModal from "./editVenueModal";
 
 const VenueTableComponent = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,6 +27,13 @@ const VenueTableComponent = () => {
       title: "Description",
       dataIndex: "description",
       key: "description",
+    },
+    {
+      title: "Edit",
+      key: "edit",
+      render: (edit, record) => {
+        return <EditVenueModal venueId={record.id} setRefresh={setRefresh} />;
+      },
     },
     {
       title: "visible",

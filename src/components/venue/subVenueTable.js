@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TableComponent from "../table";
 import VenueVisibilitySwitch from "./venueVisibilitySwitch";
 import AddSubVenueModal from "./addSubVenueModal";
+import EditVenueModal from "./editVenueModal";
 
 const SubVenueTableComponent = (props) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +28,13 @@ const SubVenueTableComponent = (props) => {
       title: "Description",
       dataIndex: "description",
       key: "description",
+    },
+    {
+      title: "Edit",
+      key: "edit",
+      render: (edit, record) => {
+        return <EditVenueModal venueId={record.id} setRefresh={setRefresh} />;
+      },
     },
     {
       title: "visible",
