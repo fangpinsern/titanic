@@ -4,6 +4,7 @@ import SubVenueTableComponent from "./subVenueTable";
 import TableComponent from "../table";
 import VenueVisibilitySwitch from "./venueVisibilitySwitch";
 import EditVenueModal from "./editVenueModal";
+import { Image } from "antd";
 
 const VenueTableComponent = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -12,6 +13,14 @@ const VenueTableComponent = () => {
   const [refresh, setRefresh] = useState(true);
 
   const columns = [
+    {
+      title: "Image",
+      dataIndex: "image",
+      key: "image",
+      render: (text) => (
+        <Image width={100} src={process.env.REACT_APP_BACKEND_URL + text} />
+      ),
+    },
     {
       title: "Name",
       dataIndex: "name",

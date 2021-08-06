@@ -42,6 +42,13 @@ const EditVenueForm = (props) => {
       >
         <Input />
       </Form.Item>
+      <Form.Item
+        label="Image Key"
+        name="image"
+        rules={[{ required: true, message: "Please input venue image" }]}
+      >
+        <Input />
+      </Form.Item>
 
       <Form.Item
         label="Opening Hours"

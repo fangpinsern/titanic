@@ -19,7 +19,7 @@ const columnsAPPROVED = [
     dataIndex: "cca",
     key: "cca",
     render: (tag) => {
-      const color = tag ? "green" : "volcano";
+      const color = tag && tag !== "PERSONAL" ? "green" : "volcano";
       return (
         <Tag color={color} key={tag}>
           {tag ?? "Personal"}
@@ -74,7 +74,7 @@ const columnsREJECTED = [
     dataIndex: "cca",
     key: "cca",
     render: (tag) => {
-      const color = tag ? "green" : "volcano";
+      const color = tag && tag !== "PERSONAL" ? "green" : "volcano";
       return (
         <Tag color={color} key={tag}>
           {tag ?? "Personal"}
@@ -171,7 +171,7 @@ const BookingRequestTableComponent = () => {
       dataIndex: "cca",
       key: "cca",
       render: (tag) => {
-        const color = tag ? "green" : "volcano";
+        const color = tag && tag !== "PERSONAL" ? "green" : "volcano";
         return (
           <Tag color={color} key={tag}>
             {tag ?? "Personal"}
