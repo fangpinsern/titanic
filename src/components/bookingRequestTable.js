@@ -132,6 +132,10 @@ const BookingRequestTableComponent = () => {
     } else if (key === "3") {
       url =
         process.env.REACT_APP_BACKEND_URL + "/api/v1/bookingreq/all?q=REJECTED";
+    } else if (key === "4") {
+      url =
+        process.env.REACT_APP_BACKEND_URL +
+        "/api/v1/bookingreq/all?q=CANCELLED";
     } else {
       url = process.env.REACT_APP_BACKEND_URL + "/api/v1/bookingreq/all";
     }
@@ -276,6 +280,19 @@ const BookingRequestTableComponent = () => {
         />
       </TabPane>
       <TabPane tab="Rejected" key="3">
+        <TableComponent
+          columns={columnsREJECTED}
+          data={
+            bookingRequestData
+              ? bookingRequestData.map((bookingreq) => {
+                  bookingreq.key = bookingreq.id;
+                  return bookingreq;
+                })
+              : []
+          }
+        />
+      </TabPane>
+      <TabPane tab="Cancelled" key="4">
         <TableComponent
           columns={columnsREJECTED}
           data={

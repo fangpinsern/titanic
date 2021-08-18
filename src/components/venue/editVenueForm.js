@@ -1,4 +1,4 @@
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, Upload } from "antd";
 // import { OmitProps } from "antd/lib/transfer/ListBody";
 
 const EditVenueForm = (props) => {
@@ -42,13 +42,13 @@ const EditVenueForm = (props) => {
       >
         <Input />
       </Form.Item>
-      <Form.Item
+      {/* <Form.Item
         label="Image Key"
         name="image"
         rules={[{ required: true, message: "Please input venue image" }]}
       >
         <Input />
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item
         label="Opening Hours"
@@ -65,6 +65,16 @@ const EditVenueForm = (props) => {
         rules={[{ required: true, message: "Please input venue description" }]}
       >
         <Input />
+      </Form.Item>
+      <Form.Item label="Image Upload" name="image">
+        <Upload
+          name="image"
+          action={process.env.REACT_APP_BACKEND_URL + "/api/v1/image/upload"}
+          headers={{ Authorization: process.env.REACT_APP_BACKEND_AUTH }}
+          listType="picture"
+        >
+          <Button>Click to upload</Button>
+        </Upload>
       </Form.Item>
 
       {/* <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

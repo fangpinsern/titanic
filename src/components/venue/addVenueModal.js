@@ -16,11 +16,22 @@ const AddVenueModal = (props) => {
     setModalText("The modal will be closed after two seconds");
     setConfirmLoading(true);
 
+    // console.log(hello.getFieldsValue(true));
+
+    const formFields = hello.getFieldsValue(true);
+
+    const body = {
+      ...formFields,
+      image: formFields.image.file.response.filename,
+    };
+
+    console.log(body);
+
     const response = await fetch(
       process.env.REACT_APP_BACKEND_URL + "/api/v1/venue/",
       {
         method: "POST",
-        body: JSON.stringify(hello.getFieldsValue(true)),
+        body: JSON.stringify(body),
         headers: {
           Authorization: process.env.REACT_APP_BACKEND_AUTH,
           "Content-Type": "application/json",

@@ -1,4 +1,4 @@
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, Upload } from "antd";
 // import { OmitProps } from "antd/lib/transfer/ListBody";
 
 const AddVenueForm = (props) => {
@@ -65,6 +65,35 @@ const AddVenueForm = (props) => {
           Submit
         </Button>
       </Form.Item> */}
+      {/* <Form.Item label="Dragger">
+        <Form.Item
+          name="dragger"
+          valuePropName="fileList"
+          getValueFromEvent={normFile}
+          noStyle
+        >
+          <Upload.Dragger name="files" action="/upload.do">
+            <p className="ant-upload-drag-icon">
+              <InboxOutlined />
+            </p>
+            <p className="ant-upload-text">
+              Click or drag file to this area to upload
+            </p>
+            <p className="ant-upload-hint">
+              Support for a single or bulk upload.
+            </p>
+          </Upload.Dragger>
+        </Form.Item>
+      </Form.Item> */}
+      <Form.Item label="Image Upload" name="image">
+        <Upload
+          name="image"
+          action={process.env.REACT_APP_BACKEND_URL + "/api/v1/image/upload"}
+          listType="picture"
+        >
+          <Button>Click to upload</Button>
+        </Upload>
+      </Form.Item>
     </Form>
   );
 };
